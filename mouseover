@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Hover Effect</title>
+    <style>
+        /* Apply to all images */
+        img {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Adjust as needed */
+            transition: transform 0.3s ease-in-out;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Magnifying glass icon */
+        .magnify-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .image-wrapper:hover .magnify-icon {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sample Images -->
+    <div class="image-wrapper">
+        <img src="your-image1.jpg" alt="Portfolio Image 1">
+        <div class="magnify-icon">🔍</div>
+    </div>
+
+    <div class="image-wrapper">
+        <img src="your-image2.jpg" alt="Portfolio Image 2">
+        <div class="magnify-icon">🔍</div>
+    </div>
+
+    <script>
+        // Automatically wrap all images in the page inside a div with class 'image-wrapper'
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll("img").forEach(img => {
+                // Create wrapper div
+                let wrapper = document.createElement("div");
+                wrapper.classList.add("image-wrapper");
+
+                // Create magnify icon
+                let icon = document.createElement("div");
+                icon.classList.add("magnify-icon");
+                icon.innerHTML = "🔍";
+
+                // Move image inside wrapper
+                img.parentNode.insertBefore(wrapper, img);
+                wrapper.appendChild(img);
+                wrapper.appendChild(icon);
+
+                // Click event to open image in new tab
+                wrapper.addEventListener("click", () => {
+                    window.open(img.src, '_blank');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
